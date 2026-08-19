@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ya Wai Thone — Data & Business Analyst</title>
+<meta name="description" content="Ya Wai Thone — Data & Business Analyst based in Dublin. MSc Data Analytics (NCI). Python, SQL, Power BI, R, Excel. Open to graduate analyst roles in Ireland." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#F4F5F2;
+    --paper-2:#ECEEEA;
+    --ink:#14171C;
+    --muted:#5C6672;
+    --line:#DDE0DA;
+    --accent:#145C4B;      /* plot green */
+    --accent-soft:#DCEAE3;
+    --amber:#C9752B;       /* data-point marker */
+    --card:#FBFBF9;
+    --focus:#145C4B;
+
+    --f-display:"Space Grotesk", system-ui, sans-serif;
+    --f-body:"IBM Plex Sans", system-ui, sans-serif;
+    --f-mono:"IBM Plex Mono", ui-monospace, monospace;
+
+    --wrap:1140px;
+    --gap:clamp(1.25rem, 4vw, 3rem);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--f-body);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit}
+  img{max-width:100%;display:block}
+
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(1.25rem,5vw,2.5rem)}
+
+  .mono{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{font-family:var(--f-mono);font-weight:500;letter-spacing:.14em;font-size:.9rem;text-decoration:none;display:flex;align-items:center;gap:.55rem}
+  .brand .dot{width:9px;height:9px;background:var(--amber);border-radius:50%;display:inline-block}
+  .nav-links{display:flex;align-items:center;gap:1.6rem}
+  .nav-links a{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.05em;text-decoration:none;color:var(--muted)}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a.cv{
+    color:var(--paper);background:var(--accent);
+    padding:.5rem .85rem;border-radius:6px;letter-spacing:.03em;
+  }
+  .nav-links a.cv:hover{background:#0f4a3c;color:var(--paper)}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);border-radius:6px;padding:.4rem .6rem;font-family:var(--f-mono);font-size:.8rem;color:var(--ink)}
+
+  @media (max-width:760px){
+    .nav-links{display:none;position:absolute;top:66px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:.5rem 0}
+    .nav-links.open{display:flex}
+    .nav-links a{width:100%;padding:.85rem clamp(1.25rem,5vw,2.5rem)}
+    .nav-links a.cv{margin:.5rem clamp(1.25rem,5vw,2.5rem);width:auto;text-align:center}
+    .nav-toggle{display:block}
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  section{padding:clamp(3.5rem,8vw,6.5rem) 0;border-bottom:1px solid var(--line)}
+  .eyebrow{display:flex;align-items:baseline;gap:.7rem;margin-bottom:1.6rem}
+  .eyebrow .idx{font-family:var(--f-mono);color:var(--accent);font-size:.78rem;letter-spacing:.1em}
+  .eyebrow .lbl{font-family:var(--f-mono);color:var(--muted);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase}
+  .eyebrow .rule{flex:1;height:1px;background:var(--line)}
+
+  h2.section-title{
+    font-family:var(--f-display);font-weight:600;
+    font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.08;
+    letter-spacing:-.01em;margin:0 0 1.2rem;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(to bottom, transparent, var(--paper) 92%),
+      repeating-linear-gradient(to right, var(--line) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px 64px),
+      var(--paper);
+    background-blend-mode:normal;
+  }
+  .hero .grid-fade{position:absolute;inset:0;background:linear-gradient(105deg, var(--paper) 40%, transparent 78%);pointer-events:none}
+  .hero-inner{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:var(--gap);align-items:center;padding:clamp(3.5rem,9vw,7rem) 0 clamp(3rem,7vw,5.5rem)}
+  .hero-eyebrow{margin-bottom:1.4rem}
+  h1{
+    font-family:var(--f-display);font-weight:700;
+    font-size:clamp(2.3rem,6.4vw,4.6rem);line-height:1;letter-spacing:-.02em;white-space:nowrap;
+    margin:0 0 1.1rem;
+  }
+  .hero-lead{font-size:clamp(1.15rem,2.4vw,1.5rem);line-height:1.35;max-width:22ch;margin:0 0 1.6rem;color:var(--ink)}
+  .hero-lead .hl{color:var(--accent);font-weight:600}
+  .hero-skills{font-family:var(--f-mono);font-size:.82rem;color:var(--muted);letter-spacing:.02em;margin-bottom:2rem}
+  .hero-skills .sep{color:var(--amber);padding:0 .35rem}
+  .cta-row{display:flex;flex-wrap:wrap;gap:.7rem}
+  .btn{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-family:var(--f-mono);font-size:.82rem;letter-spacing:.03em;
+    text-decoration:none;padding:.7rem 1.05rem;border-radius:7px;border:1px solid var(--ink);
+    transition:transform .15s ease, background .15s ease, color .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .btn.primary:hover{background:var(--accent);border-color:var(--accent)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{background:var(--card)}
+
+  /* plot signature */
+  .plot{position:relative;width:100%;aspect-ratio:1/.86;min-height:220px}
+  .plot svg{width:100%;height:100%;overflow:visible}
+  .plot .axis{stroke:var(--line);stroke-width:1}
+  .plot .series{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.1s .35s cubic-bezier(.6,.02,.2,1) forwards}
+  .plot .pt{fill:var(--paper);stroke:var(--amber);stroke-width:2.5;opacity:0;animation:pop .4s ease forwards}
+  .plot .band{fill:var(--accent);opacity:.06}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes pop{to{opacity:1}}
+  @media (prefers-reduced-motion:reduce){
+    .plot .series{animation:none;stroke-dashoffset:0}
+    .plot .pt{animation:none;opacity:1}
+  }
+
+  @media (max-width:860px){
+    .hero-inner{grid-template-columns:1fr;padding-bottom:clamp(2rem,7vw,3rem)}
+    .plot{order:-1;max-width:360px}
+    .hero .grid-fade{background:linear-gradient(180deg, var(--paper) 30%, transparent 90%)}
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid;grid-template-columns:1.4fr .9fr;gap:var(--gap);align-items:start}
+  .about-body p{margin:0 0 1.1rem;max-width:56ch}
+  .about-body p:last-child{margin-bottom:0}
+  .facts{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden}
+  .fact{display:flex;justify-content:space-between;gap:1rem;padding:.85rem 1.1rem;border-bottom:1px solid var(--line)}
+  .fact:last-child{border-bottom:0}
+  .fact .k{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .fact .v{text-align:right;font-weight:500;font-size:.95rem}
+  .fact .v.accent{color:var(--accent)}
+  @media (max-width:760px){.about-grid{grid-template-columns:1fr}}
+
+  /* ---------- Skills ---------- */
+  .skill-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem 2.4rem}
+  .skill-group h3{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 .85rem;padding-bottom:.55rem;border-bottom:1px solid var(--line)}
+  .tags{display:flex;flex-wrap:wrap;gap:.5rem}
+  .tag{font-family:var(--f-mono);font-size:.8rem;padding:.35rem .7rem;border:1px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink)}
+  .tag.key{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+  @media (max-width:640px){.skill-groups{grid-template-columns:1fr}}
+
+  /* ---------- Work ---------- */
+  .feature{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:var(--gap);
+    border:1px solid var(--line);border-radius:14px;background:var(--card);
+    padding:clamp(1.5rem,3vw,2.4rem);margin-bottom:1.4rem;position:relative;overflow:hidden;
+  }
+  .feature::before{content:"";position:absolute;inset:0;background:
+    repeating-linear-gradient(to right, var(--line) 0 1px, transparent 1px 40px);opacity:.4;pointer-events:none;
+    -webkit-mask:linear-gradient(to left, black, transparent 55%);mask:linear-gradient(to left, black, transparent 55%)}
+  .feature .fmeta{position:relative}
+  .feature .kicker{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem}
+  .feature .kicker::before{content:"";width:22px;height:1px;background:var(--amber)}
+  .feature h3{font-family:var(--f-display);font-weight:600;font-size:clamp(1.35rem,3vw,1.9rem);line-height:1.1;margin:0 0 .8rem;letter-spacing:-.01em}
+  .feature p{margin:0 0 1.3rem;color:var(--muted);max-width:46ch}
+  .feature .fright{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:1.2rem}
+  .feature .qwrap{border-left:2px solid var(--accent);padding:.4rem 0 .4rem 1.1rem}
+  .feature .qwrap .q{font-family:var(--f-display);font-size:clamp(1.1rem,2.4vw,1.45rem);line-height:1.25;color:var(--ink)}
+  @media (max-width:760px){.feature{grid-template-columns:1fr}.feature::before{display:none}}
+
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+  .card{
+    display:flex;flex-direction:column;
+    border:1px solid var(--line);border-radius:12px;background:var(--card);
+    padding:1.35rem 1.35rem 1.2rem;text-decoration:none;color:inherit;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;position:relative;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 30px -18px rgba(20,23,28,.35);border-color:var(--accent)}
+  .card .cidx{font-family:var(--f-mono);font-size:.72rem;color:var(--muted);letter-spacing:.08em;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center}
+  .card .cidx .arrow{color:var(--accent);opacity:0;transform:translateX(-4px);transition:.18s ease}
+  .card:hover .cidx .arrow{opacity:1;transform:translateX(0)}
+  .card h4{font-family:var(--f-display);font-weight:600;font-size:1.12rem;line-height:1.2;margin:0 0 .55rem}
+  .card p{margin:0 0 1.1rem;font-size:.92rem;color:var(--muted);flex:1}
+  .card .ctags{display:flex;flex-wrap:wrap;gap:.4rem}
+  .card .ctag{font-family:var(--f-mono);font-size:.68rem;color:var(--muted);padding:.22rem .5rem;border:1px solid var(--line);border-radius:5px}
+  @media (max-width:900px){.work-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.work-grid{grid-template-columns:1fr}}
+
+  /* project icons */
+  .cicon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;flex:none;border:1px solid var(--line);border-radius:9px;color:var(--accent);background:var(--paper);transition:background .18s ease,border-color .18s ease}
+  .cicon svg{width:20px;height:20px}
+  .card .clabel{flex:1;margin-left:.65rem}
+  .card:hover .cicon{border-color:var(--accent);background:var(--accent-soft)}
+  .feature .ficon{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border:1px solid var(--line);border-radius:11px;color:var(--accent);background:var(--paper);margin-bottom:1.05rem}
+  .feature .ficon svg{width:25px;height:25px}
+
+  /* ---------- Certifications ---------- */
+  .certs{display:grid;grid-template-columns:repeat(2,1fr);gap:0 2.4rem}
+  .cert{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;padding:.95rem 0;border-bottom:1px solid var(--line)}
+  .cert .cname{font-weight:500}
+  .cert .cissuer{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);white-space:nowrap}
+  @media (max-width:640px){.certs{grid-template-columns:1fr}}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);align-items:start}
+  .contact-lead{font-family:var(--f-display);font-size:clamp(1.4rem,3vw,2rem);line-height:1.2;letter-spacing:-.01em;margin:0 0 1.5rem;max-width:16ch}
+  .clist{list-style:none;margin:0;padding:0}
+  .clist li{border-top:1px solid var(--line);padding:.9rem 0}
+  .clist li:last-child{border-bottom:1px solid var(--line)}
+  .clist a{display:flex;justify-content:space-between;gap:1rem;text-decoration:none;align-items:center}
+  .clist .k{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .clist .v{font-weight:500}
+  .clist a:hover .v{color:var(--accent)}
+  form .field{margin-bottom:1rem}
+  form label{display:block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+  form input,form textarea{width:100%;font-family:var(--f-body);font-size:.95rem;padding:.7rem .85rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+  form input:focus,form textarea:focus{outline:2px solid var(--focus);outline-offset:1px;border-color:var(--accent)}
+  form button{font-family:var(--f-mono);font-size:.82rem;letter-spacing:.03em;background:var(--ink);color:var(--paper);border:none;padding:.75rem 1.1rem;border-radius:8px;cursor:pointer;transition:background .15s ease}
+  form button:hover{background:var(--accent)}
+  @media (max-width:760px){.contact-grid{grid-template-columns:1fr}}
+
+  /* ---------- Footer ---------- */
+  footer.site{padding:2.2rem 0;border-bottom:none}
+  .foot-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;align-items:center}
+  .foot-inner .mono{font-size:.72rem}
+
+  a:focus-visible,button:focus-visible,.btn:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
+
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand"><span class="dot"></span>YA WAI THONE</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <a href="Ya-Wai-Thone-CV.pdf" class="cv" download>Download CV ↓</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="grid-fade"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow mono">Data &amp; Business Analyst — Dublin, IE</div>
+      <h1>Ya Wai Thone</h1>
+      <p class="hero-lead">I turn financial and commercial data into <span class="hl">decisions people can act on.</span></p>
+      <div class="hero-skills">Python <span class="sep">·</span> SQL <span class="sep">·</span> Power BI <span class="sep">·</span> R <span class="sep">·</span> Excel <span class="sep">·</span> PostgreSQL</div>
+      <div class="cta-row">
+        <a href="#work" class="btn primary">View selected work</a>
+        <a href="https://www.linkedin.com/in/ya-wai-thone/" class="btn ghost" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://github.com/yawaithone" class="btn ghost" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+
+    <!-- Signature: a data series that draws itself in -->
+    <div class="plot" aria-hidden="true">
+      <svg viewBox="0 0 340 300" role="img">
+        <!-- axes -->
+        <line class="axis" x1="30" y1="20" x2="30" y2="260"/>
+        <line class="axis" x1="30" y1="260" x2="330" y2="260"/>
+        <!-- area band under series -->
+        <path class="band" d="M30 260 L30 210 L80 200 L130 160 L180 168 L230 110 L280 88 L320 52 L320 260 Z"/>
+        <!-- trend series -->
+        <path class="series" d="M30 210 L80 200 L130 160 L180 168 L230 110 L280 88 L320 52"/>
+        <!-- points -->
+        <circle class="pt" cx="30"  cy="210" r="4.5" style="animation-delay:.7s"/>
+        <circle class="pt" cx="80"  cy="200" r="4.5" style="animation-delay:.95s"/>
+        <circle class="pt" cx="130" cy="160" r="4.5" style="animation-delay:1.2s"/>
+        <circle class="pt" cx="180" cy="168" r="4.5" style="animation-delay:1.45s"/>
+        <circle class="pt" cx="230" cy="110" r="4.5" style="animation-delay:1.7s"/>
+        <circle class="pt" cx="280" cy="88"  r="4.5" style="animation-delay:1.95s"/>
+        <circle class="pt" cx="320" cy="52"  r="5.5" style="animation-delay:2.2s"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="idx">01</span><span class="lbl">About</span><span class="rule"></span></div>
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <h2 class="section-title">An analyst with a business brain.</h2>
+        <p>I'm finishing an MSc in Data Analytics at the National College of Ireland, built on a First-Class-Honours background in Electronics Engineering. Before Dublin, I spent two years close to real business decisions — running credit analysis for corporate clients at uab bank, and managing key FMCG accounts for Daraz, part of the Alibaba Group.</p>
+        <p>That mix is the whole point. I don't just build the model or the dashboard — I understand the commercial question behind it. I'm as comfortable cleaning and querying data in SQL and Python as I am turning it into a Power BI view a stakeholder can actually use, and I care about getting the interpretation right, not just the chart.</p>
+        <p>Right now I'm looking for a graduate <strong>Data Analyst</strong> or <strong>Business Analyst</strong> role in Ireland where I can do both.</p>
+      </div>
+      <div class="facts reveal">
+        <div class="fact"><span class="k">Degree</span><span class="v">MSc Data Analytics, NCI</span></div>
+        <div class="fact"><span class="k">Undergrad</span><span class="v">BEng Electronics — 1:1 Hons</span></div>
+        <div class="fact"><span class="k">Based in</span><span class="v">Dublin, Ireland</span></div>
+        <div class="fact"><span class="k">Available</span><span class="v accent">Full-time · Sep 2026</span></div>
+        <div class="fact"><span class="k">Work rights</span><span class="v">Eligible · Stamp 1G Graduate</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="idx">02</span><span class="lbl">Toolkit</span><span class="rule"></span></div>
+    <h2 class="section-title reveal">What I work with.</h2>
+    <div class="skill-groups reveal">
+      <div class="skill-group">
+        <h3>Languages &amp; querying</h3>
+        <div class="tags">
+          <span class="tag key">Python</span>
+          <span class="tag key">SQL</span>
+          <span class="tag key">R</span>
+          <span class="tag">pandas</span>
+          <span class="tag">NumPy</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>BI &amp; visualisation</h3>
+        <div class="tags">
+          <span class="tag key">Power BI</span>
+          <span class="tag key">Excel (advanced)</span>
+          <span class="tag">Matplotlib</span>
+          <span class="tag">Seaborn</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Data &amp; storage</h3>
+        <div class="tags">
+          <span class="tag key">PostgreSQL</span>
+          <span class="tag">Data cleaning</span>
+          <span class="tag">ETL pipelines</span>
+          <span class="tag">Data governance</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Analytics &amp; statistics</h3>
+        <div class="tags">
+          <span class="tag key">Machine learning</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">Statistical modelling</span>
+          <span class="tag">SPSS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="idx">03</span><span class="lbl">Selected work</span><span class="rule"></span></div>
+
+    <!-- Featured -->
+    <a class="feature reveal" href="https://github.com/yawaithone/Analytics-Data-Visualizations-Project" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+      <div class="fmeta">
+        <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.1"/><circle cx="5" cy="18" r="2.1"/><circle cx="19" cy="12" r="2.1"/><path d="M7.1 6H12a4 4 0 0 1 4 4v.1"/><path d="M7.1 18H12a4 4 0 0 0 4-4v-.1"/></svg></div>
+        <span class="kicker">Featured · Data engineering</span>
+        <h3>Global economic trends, end to end.</h3>
+        <p>A full data pipeline: two decades of World Bank indicators cleaned and reshaped in Python, stored in PostgreSQL, orchestrated with Dagster inside Docker, then surfaced through Power BI and Streamlit dashboards.</p>
+        <span class="btn primary" style="pointer-events:none">View on GitHub ↗</span>
+      </div>
+      <div class="fright">
+        <div class="qwrap"><div class="q">Sourcing, modelling and serving twenty years of macroeconomic data as one reproducible workflow.</div></div>
+        <div class="ctags" style="display:flex;flex-wrap:wrap;gap:.4rem">
+          <span class="ctag">Python</span><span class="ctag">PostgreSQL</span><span class="ctag">Dagster</span><span class="ctag">Docker</span><span class="ctag">Power BI</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Grid -->
+    <div class="work-grid">
+      <a class="card reveal" href="https://github.com/yawaithone/Fake-News-Detection" target="_blank" rel="noopener">
+        <div class="cidx"><span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H7A1.5 1.5 0 0 0 5.5 4.5v15A1.5 1.5 0 0 0 7 21h4"/><path d="M13 3l5 5v3"/><path d="M13 3v5h5"/><circle cx="16.5" cy="16.5" r="2.8"/><path d="M18.6 18.6 21 21"/></svg></span><span class="clabel">01 / NLP</span><span class="arrow">↗</span></div>
+        <h4>Fake news detection</h4>
+        <p>Fine-tuned DistilBERT to classify political statements from the LIAR dataset, using GPT-4.1-mini paraphrasing to augment the training data. Group project — I built the transformer pipeline.</p>
+        <div class="ctags"><span class="ctag">Python</span><span class="ctag">DistilBERT</span><span class="ctag">NLP</span></div>
+      </a>
+
+      <a class="card reveal" href="https://github.com/yawaithone/Data-Mining-Machine-Learning-Project" target="_blank" rel="noopener">
+        <div class="cidx"><span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8.5 12 4.5l9.5 4-9.5 4-9.5-4z"/><path d="M6.5 10.7V15c0 1.2 2.5 2.6 5.5 2.6s5.5-1.4 5.5-2.6v-4.3"/><path d="M21.5 8.5V13"/></svg></span><span class="clabel">02 / Machine learning</span><span class="arrow">↗</span></div>
+        <h4>Does online learning work?</h4>
+        <p>A machine-learning evaluation using the OULAD and Coursera datasets — comparing classical models against DistilBERT to predict learner outcomes and classify course sentiment.</p>
+        <div class="ctags"><span class="ctag">Python</span><span class="ctag">scikit-learn</span><span class="ctag">DistilBERT</span></div>
+      </a>
+
+      <a class="card reveal" href="https://github.com/yawaithone/Hospital-Readmission-Prediction" target="_blank" rel="noopener">
+        <div class="cidx"><span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3.2l1.8-5 3 11 2.4-7 1.4 3H21"/></svg></span><span class="clabel">03 / Predictive modelling</span><span class="arrow">↗</span></div>
+        <h4>Hospital readmission prediction</h4>
+        <p>Predicting 30-day readmission from the UCI diabetes dataset with LightGBM and SMOTE to handle class imbalance, tuned to catch the at-risk patients that matter most.</p>
+        <div class="ctags"><span class="ctag">Python</span><span class="ctag">LightGBM</span><span class="ctag">SMOTE</span></div>
+      </a>
+
+      <a class="card reveal" href="https://github.com/yawaithone/Atelier-Cinema-BI-CRM" target="_blank" rel="noopener">
+        <div class="cidx"><span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M9 20h6M12 17v3"/><path d="M7.5 13.5V11M11.5 13.5v-5M15.5 13.5V10"/></svg></span><span class="clabel">04 / BI &amp; CRM</span><span class="arrow">↗</span></div>
+        <h4>Atelier Cinema BI &amp; CRM</h4>
+        <p>A business-intelligence and CRM build for a cinema — Salesforce data modelled and surfaced through Tableau dashboards to track customer and sales performance. Group project.</p>
+        <div class="ctags"><span class="ctag">Tableau</span><span class="ctag">Salesforce</span><span class="ctag">CRM</span></div>
+      </a>
+
+      <a class="card reveal" href="https://github.com/yawaithone/Data-Governance-Group-Project" target="_blank" rel="noopener">
+        <div class="cidx"><span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.8v5.2c0 4.4-3 7.4-7 8.9-4-1.5-7-4.5-7-8.9V5.8L12 3z"/><path d="M9 12l2 2 4-4.2"/></svg></span><span class="clabel">05 / Data governance</span><span class="arrow">↗</span></div>
+        <h4>Ethical governance in migration tech</h4>
+        <p>A critical study of the 2024 Greek migration ruling and the EU–US border partnership, weighing security goals against privacy and ethics under the SDG framework.</p>
+        <div class="ctags"><span class="ctag">Policy</span><span class="ctag">Privacy</span><span class="ctag">Ethics</span></div>
+      </a>
+
+      <a class="card reveal" href="https://github.com/yawaithone/Chicago-Data-Analysis" target="_blank" rel="noopener">
+        <div class="cidx"><span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="6.5" ry="2.8"/><path d="M5.5 6v11.5c0 1.6 2.9 2.9 6.5 2.9s6.5-1.3 6.5-2.9V6"/><path d="M5.5 11.8c0 1.6 2.9 2.9 6.5 2.9s6.5-1.3 6.5-2.9"/></svg></span><span class="clabel">06 / SQL analysis</span><span class="arrow">↗</span></div>
+        <h4>Chicago city data analysis</h4>
+        <p>Querying socioeconomic, crime and school datasets for the City of Chicago to answer layered questions with joins and sub-queries.</p>
+        <div class="ctags"><span class="ctag">SQL</span><span class="ctag">Joins</span></div>
+      </a>
+
+      <a class="card reveal" href="https://github.com/yawaithone/Immigration-to-Canada" target="_blank" rel="noopener">
+        <div class="cidx"><span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><rect x="7" y="12" width="2.6" height="5.5"/><rect x="11.7" y="8.5" width="2.6" height="9"/><rect x="16.4" y="14" width="2.6" height="3.5"/></svg></span><span class="clabel">07 / Data visualisation</span><span class="arrow">↗</span></div>
+        <h4>Immigration to Canada</h4>
+        <p>Telling the story of decades of immigration data through area, box, bar and scatter charts — choosing the right view for each question.</p>
+        <div class="ctags"><span class="ctag">Python</span><span class="ctag">Matplotlib</span></div>
+      </a>
+
+      <a class="card reveal" href="https://github.com/yawaithone/Ecommerce-Sales-Analysis" target="_blank" rel="noopener">
+        <div class="cidx"><span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 8h11.6l-1 11.2a1.4 1.4 0 0 1-1.4 1.3H8.6a1.4 1.4 0 0 1-1.4-1.3L6.2 8z"/><path d="M9 8V6.2a3 3 0 0 1 6 0V8"/></svg></span><span class="clabel">08 / Commercial analysis</span><span class="arrow">↗</span></div>
+        <h4>E-commerce sales analysis</h4>
+        <p>Exploring sales patterns to find what drives revenue — the kind of assortment and performance analysis I did day-to-day at Daraz.</p>
+        <div class="ctags"><span class="ctag">Python</span><span class="ctag">pandas</span></div>
+      </a>
+
+      <a class="card reveal" href="https://github.com/yawaithone/Research-Thesis" target="_blank" rel="noopener">
+        <div class="cidx"><span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15.5" r="1.6"/><path d="M8.6 11.9a5 5 0 0 1 6.8 0"/><path d="M6.2 9.3a8.5 8.5 0 0 1 11.6 0"/></svg></span><span class="clabel">09 / Published research</span><span class="arrow">↗</span></div>
+        <h4>Multisensor data collection (TSN)</h4>
+        <p>Undergraduate thesis on multisensor data collection for time-sensitive networks, analysed in SPSS and published at NCSE 2024.</p>
+        <div class="ctags"><span class="ctag">SPSS</span><span class="ctag">Published</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="idx">04</span><span class="lbl">Certifications</span><span class="rule"></span></div>
+    <h2 class="section-title reveal">Backed by the coursework.</h2>
+    <div class="certs reveal">
+      <div class="cert"><span class="cname">IBM Data Analyst</span><span class="cissuer">IBM · 2025</span></div>
+      <div class="cert"><span class="cname">SQL for Data Science</span><span class="cissuer">UC Davis · 2025</span></div>
+      <div class="cert"><span class="cname">The Power of Statistics</span><span class="cissuer">Google · 2025</span></div>
+      <div class="cert"><span class="cname">Microsoft Power BI Data Analyst</span><span class="cissuer">Microsoft · 2024</span></div>
+      <div class="cert"><span class="cname">Excel for Data Analytics &amp; Visualisation</span><span class="cissuer">Macquarie · 2024</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="idx">05</span><span class="lbl">Contact</span><span class="rule"></span></div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="contact-lead">Open to graduate analyst roles in Ireland.</p>
+        <ul class="clist">
+          <li><a href="mailto:yawaithone@gmail.com"><span class="k">Email</span><span class="v">yawaithone@gmail.com</span></a></li>
+          <li><a href="https://www.linkedin.com/in/ya-wai-thone/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">in/ya-wai-thone ↗</span></a></li>
+          <li><a href="https://github.com/yawaithone" target="_blank" rel="noopener"><span class="k">GitHub</span><span class="v">@yawaithone ↗</span></a></li>
+          <li><a href="#top"><span class="k">Location</span><span class="v">Dublin, Ireland</span></a></li>
+        </ul>
+      </div>
+      <!-- To make this form send: create a free form at formspree.io and paste your endpoint into the action below. -->
+      <form class="reveal" action="https://formspree.io/f/your-form-id" method="POST">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap foot-inner">
+    <span class="mono">© 2026 Ya Wai Thone — Dublin, Ireland</span>
+    <span class="mono">Designed &amp; built by Ya Wai Thone</span>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open'); toggle.setAttribute('aria-expanded', false);
+  }));
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
